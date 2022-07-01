@@ -1,25 +1,21 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // your code here
-
-    const formTwo = document.getElementById("newform");
-    const taskDiscript = document.getElementById("newdescription");
-    const newPriority = document.getElementById("newtaskdiscri");
-
-    const newdoc = document.getElementById("tasks");
-
-    formTwo.addEventListener("submit", createNewTask);
+    document.querySelector("#main-content").addEventListener("submit", (e) => {
+        e.preventDefault();
+        handleToDo(document.querySelector('input').value);
+    })
 });
-const createNewTask = event => {
-    event.preventDefault();
-    //stop this form  not  to submit
-    const taskDiscript = document.getElementById("newdescription");
-    const newTask = document.createElement("li");
-    newTask.innerText = .value;
 
-    appendNewTask(newTask);
-    event.target.reset();
-};
+function handleToDo(todo) {
+    console.log(todo)
+    let li = document.createElement(`li`)
+    let btn = document.createElement(`button`)
+    btn.addEventListener('click', handleDelete)
+    btn.textContent = `Remove Todo`
+    li.textContent = `${todo} `
+    li.appendChild(btn)
+    document.getElementById(`tasks`).appendChild(li)
+}
 
-const appendNewTask = task => {
-    document.getElementById("tasks").appendChild(task);
-};
+function handleDelete(e) {
+    e.target.parentNode.remove()
+}
